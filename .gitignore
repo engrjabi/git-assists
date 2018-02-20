@@ -1,0 +1,9 @@
+
+#Jabi_Ignores
+*.tmp
+~$*.doc*
+~$*.xls*
+*.xlk
+~$*.ppt*
+*.~vsd*
+logs/
