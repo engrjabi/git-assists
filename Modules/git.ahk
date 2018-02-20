@@ -20,7 +20,7 @@ Gui, GAAgent:Destroy
 Return
 
 ;;--------------------------------AI INIT--------------------------------------------------;;
-GAAgentButtonInitialiaze:
+GAAgentButtonInitialize:
 
 Gui, GAAgent:Destroy
 Gui, GitLog:Destroy
