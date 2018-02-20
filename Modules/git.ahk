@@ -26,7 +26,7 @@ Gui, GAAgent:Destroy
 Gui, GitLog:Destroy
 
 FileRead, det_if_ignore, %Full_Project_Location%\.gitignore
-genGitIgnore(det_if_ignore)
+genGitIgnore(det_if_ignore, Full_Project_Location)
 
 FormatTime, Today_Date_Time, , yyyy_MM_dd_
 
@@ -80,7 +80,7 @@ Gui, GAAgent:Destroy
 Gui, GitLog:Destroy
 
 FileRead, det_if_ignore, %Full_Project_Location%\.gitignore
-genGitIgnore(det_if_ignore)
+genGitIgnore(det_if_ignore, Full_Project_Location)
 
 RunWait, %ComSpec% /c "git fetch > "%A_Temp%\git_log.txt"", %Full_Project_Location%, Hide
 RunWait, %ComSpec% /c "git status >> "%A_Temp%\git_log.txt"", %Full_Project_Location%, Hide
@@ -276,8 +276,8 @@ Msgbox Connot Create Folders
 Return
 
 ;;---------------------------------------GENERATE GITIGNORE----------------------------------------------------------;;
-genGitIgnore(rawFile) {
-If !(RegExMatch(rawFile, "im)#Jabi_Ignores"))
+genGitIgnore(genGitIgnore_rawFile, genGitIgnore_loc) {
+If !(RegExMatch(genGitIgnore_rawFile, "im)#Jabi_Ignores"))
 {
 FileAppend,
 (
@@ -289,7 +289,7 @@ FileAppend,
 ~$*.ppt*
 *.~vsd*
 node_modules
-), %Full_Project_Location%\.gitignore
+), %genGitIgnore_loc%\.gitignore
 }
 }
 

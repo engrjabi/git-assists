@@ -1,2 +1,10 @@
 
 BackupPathLocations.ini
+
+#Jabi_Ignores
+~$*.doc*
+~$*.xls*
+*.xlk
+~$*.ppt*
+*.~vsd*
+node_modules
