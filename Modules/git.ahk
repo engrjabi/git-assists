@@ -270,6 +270,20 @@ Menu List_Timeline,Add, Present, goto_timeline
 Menu List_Timeline,Show,0 ,0 
 Return
 
+;;-------------------------------------Take Project-------------------------------------------------------------;;
+Take_Project:
+IfExist, %Full_Project_Location%\%A_ThisMenuItem%
+	{
+		Msgbox Project Already Exists in Folder. Either Rename or Delete it First.
+		Return
+	}
+
+Progress, b fs9 CW800080 CTFFFFFF zh0, %A_ThisMenuItem%...`nPulling Project Please Wait...
+RunWait, %ComSpec% /c git clone "%Back_Up_Path%\%A_ThisMenuItem%", %Full_Project_Location%, Hide
+Progress, Off
+Msgbox Project: %A_ThisMenuItem% `nSuccessfully Pulled from Database
+Return
+
 ;;-------------------------------------Goto TimeLine-------------------------------------------------------------;;
 goto_timeline:
 If (A_ThisMenuItem != "Present")
