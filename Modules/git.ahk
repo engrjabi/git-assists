@@ -172,6 +172,57 @@ IfExist, %Full_Project_Location%\.git
 	Return
 }
 
+Else
+{
+	kywrd_srch := 
+	Gui +LastFound +OwnDialogs +AlwaysOnTop
+	InputBox, kywrd_srch, Key Word Search, Please enter a keyword of the projects you want to list `nyou can enter any of the following: `n`n1. DATE FORMAT [YYYYMM]`n2. Any KeyWord in ProjectName `n3. Just leave blank to list all, , , 300
+	
+	StringUpper, kywrd_srch_all_caps, kywrd_srch
+	
+	If (ErrorLevel = 1)
+		Return
+	
+	If (RegExMatch(kywrd_srch, "i)^[0-9]"))
+		kywrd_srch := SubStr(kywrd_srch, 1 , 4) . "_" . SubStr(kywrd_srch, 5 , 6)
+		
+		If kywrd_srch != 
+			{
+				Loop, Files, %Back_Up_Path%\*%kywrd_srch%* , D
+					{
+						chk_if_empty := A_LoopFileName
+						Menu List_Menu,Add, %A_LoopFileName%, Take_Project
+					}
+				
+				If chk_if_empty = 
+					{
+						MsgBox No Such Project found in Database
+						Return
+					}
+				
+				Menu List_Menu,Show,0 ,0 
+				Return
+			}
+		
+		Else
+			{
+				Loop, Files, %Back_Up_Path%\* , D
+					{
+						chk_if_empty := A_LoopFileName
+						Menu List_Menu,Add, %A_LoopFileName%, Take_Project
+					}
+				
+				If chk_if_empty = 
+					{
+						MsgBox Database Empty
+						Return
+					}
+				
+				Menu List_Menu,Show,0 ,0 
+				Return
+			}
+}
+
 Return
 ;;--------------------------------AI TIMELINE--------------------------------------------------;;
 GAAgentButtonTimeLine:
